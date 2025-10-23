@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "framework": null,
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "public"
+  "buildCommand": "echo 'Static build ready'",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
