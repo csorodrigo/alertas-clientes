@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Configuração com credenciais
+config.js
+
+# Dados gerados
+clientes-baseline.json
+clientes-com-sugestoes.json
+*.log
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store

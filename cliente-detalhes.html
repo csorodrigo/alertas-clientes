@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Cliente - Análise de Propostas</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen p-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-6">
+        <a href="dashboard-geral.html" class="text-blue-600 hover:text-blue-800">← Voltar ao Dashboard</a>
+      </div>
+
+      <div id="loading" class="text-center py-20">
+        <div class="text-xl text-gray-600">Carregando dados do cliente...</div>
+      </div>
+
+      <div id="conteudo" class="hidden">
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+          <div class="flex justify-between items-start">
+            <div>
+              <h1 id="nome-cliente" class="text-3xl font-bold text-gray-900 mb-2"></h1>
+              <p id="cnpj-cliente" class="text-gray-600 mb-4"></p>
+            </div>
+            <div id="badge-alerta"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="text-sm text-gray-600 mb-2">Win Rate Histórico</div>
+            <div id="win-historico" class="text-3xl font-bold text-gray-900"></div>
+          </div>
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="text-sm text-gray-600 mb-2">Win Rate Recente (3 meses)</div>
+            <div id="win-recente" class="text-3xl font-bold"></div>
+          </div>
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="text-sm text-gray-600 mb-2">Desvio</div>
+            <div id="desvio" class="text-3xl font-bold"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-bold mb-4">Métricas Comparativas</h2>
+            <table class="w-full">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left py-2">Métrica</th>
+                  <th class="text-center py-2">Histórico</th>
+                  <th class="text-center py-2">Recente</th>
+                  <th class="text-center py-2">Desvio</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-metricas"></tbody>
+            </table>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-bold mb-4">Informações Adicionais</h2>
+            <div class="space-y-3">
+              <div class="flex justify-between border-b pb-2">
+                <span class="text-gray-600">Motivo do Alerta:</span>
+                <span id="motivo-alerta" class="font-bold text-sm text-right"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Dias sem venda:</span>
+                <span id="dias-sem-venda" class="font-bold"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Total de propostas:</span>
+                <span id="total-propostas" class="font-bold"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Ticket médio histórico:</span>
+                <span id="ticket-historico" class="font-bold"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Última atualização:</span>
+                <span id="ultima-atualizacao" class="font-bold"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow p-8 text-white mb-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">💡 Sugestões com IA para Recuperar o Cliente</h2>
+            <button
+              onclick="gerarSugestoesIA()"
+              id="btn-gerar-sugestoes"
+              class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+              🤖 Gerar Sugestões com IA
+            </button>
+          </div>
+          <div id="sugestoes" class="space-y-4">
+            <div class="bg-white/10 rounded-lg p-6 text-center">
+              <div class="text-lg mb-2">Clique no botão acima para gerar 5 sugestões personalizadas</div>
+              <div class="text-sm opacity-80">Usa GPT-4o para analisar o padrão individual do cliente</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <h2 class="text-xl font-bold mb-4">Histórico Últimos 20 Deals</h2>
+          <div id="historico-deals">
+            <div class="text-center py-8 text-gray-500">Carregando histórico de deals...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cliente-detalhes.js"></script>
+</body>
+</html>
