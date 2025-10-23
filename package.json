@@ -6,7 +6,7 @@
     "varredura": "node varredura-completa-clientes.js",
     "sync": "node sincronizar-supabase.js",
     "job": "node job-semanal.js",
-    "build": "echo 'Projeto estático - sem build necessário'"
+    "build": "bash build.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0"
