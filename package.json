@@ -1,13 +1,12 @@
 {
-  "name": "propostas-perdidas",
+  "name": "alertas-clientes",
   "version": "1.0.0",
-  "description": "Sistema de análise de propostas perdidas",
-  "main": "index.js",
+  "description": "Sistema de análise de propostas perdidas com baseline individual",
   "scripts": {
     "varredura": "node varredura-completa-clientes.js",
     "sync": "node sincronizar-supabase.js",
     "job": "node job-semanal.js",
-    "dashboard": "open dashboard-geral.html"
+    "build": "echo 'Projeto estático - sem build necessário'"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0"
