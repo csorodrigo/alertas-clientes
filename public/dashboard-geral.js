@@ -123,4 +123,10 @@ function renderizarTabela(clientes) {
 
 document.getElementById('search').addEventListener('input', filtrarEExibir);
 document.getElementById('filter-severidade').addEventListener('change', filtrarEExibir);
+
+// Inicializar com filtro CRÍTICO como padrão
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('filter-severidade').value = 'CRÍTICO';
+});
+
 carregarDados();
