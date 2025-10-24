@@ -201,44 +201,28 @@ Responda APENAS com JSON válido:
   {"titulo": "🎯 TÍTULO COM EMOJI E PRAZO", "descricao": "Descrição com números reais"}
 ]`;
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Chamar API proxy do Vercel (usa env vars server-side de forma segura)
+    const response = await fetch('/api/generate-suggestions', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'gpt-4o',
-        messages: [{
-          role: 'system',
-          content: 'Você é um especialista em vendas B2B. Responda sempre em JSON válido sem texto adicional.'
-        }, {
-          role: 'user',
-          content: prompt
-        }],
-        temperature: 0.7,
-        max_tokens: 2000
+        cliente: clienteAtual,
+        deals: dealsRecentes
       })
     });
 
     const data = await response.json();
 
     if (data.error) {
-      throw new Error(data.error.message || 'Erro na API OpenAI');
+      throw new Error(data.error);
     }
 
-    let sugestoes = [];
+    const sugestoes = data.sugestoes;
 
-    if (data.choices && data.choices[0] && data.choices[0].message) {
-      const texto = data.choices[0].message.content;
-      const match = texto.match(/\[[\s\S]*\]/);
-      if (match) {
-        sugestoes = JSON.parse(match[0]);
-      }
-    }
-
-    if (sugestoes.length === 0) {
-      throw new Error('Nenhuma sugestão retornada');
+    if (!sugestoes || sugestoes.length === 0) {
+      throw new Error('Nenhuma sugestão retornada pela IA');
     }
 
     // Exibir sugestões
